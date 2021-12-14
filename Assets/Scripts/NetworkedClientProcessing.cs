@@ -91,3 +91,17 @@ static public class ServerToClientSignifiers
 
 #endregion
 
+
+
+
+///Task List
+/// move game logic to server
+/// decouple input from client and process on server
+///
+/// each dot sends it's position and new velcotiy perframe
+///
+/// Each client updatres the position of each dot on update based on its current velocity
+/// Each client updates the position and velocity of each dot when it receives the message from
+///
+/// There needs 
+/// 

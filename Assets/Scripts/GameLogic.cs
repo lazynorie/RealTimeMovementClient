@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,7 @@ public class GameLogic : MonoBehaviour
     Vector2 characterPositionInPercent;
     Vector2 characterVelocityInPercent;
     const float CharacterSpeed = 0.25f;
-    const float HalfCharacterSpeed = 0.125f;
+    float DiagonalCharacterSpeed = Mathf.Sqrt(CharacterSpeed * CharacterSpeed +CharacterSpeed * CharacterSpeed);
 
     void Start()
     {
@@ -32,23 +33,23 @@ public class GameLogic : MonoBehaviour
 
             if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
             {
-                characterVelocityInPercent.x = HalfCharacterSpeed;
-                characterVelocityInPercent.y = HalfCharacterSpeed;
+                characterVelocityInPercent.x = DiagonalCharacterSpeed;
+                characterVelocityInPercent.y = DiagonalCharacterSpeed;
             }
             else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
             {
-                characterVelocityInPercent.x = -HalfCharacterSpeed;
-                characterVelocityInPercent.y = HalfCharacterSpeed;
+                characterVelocityInPercent.x = -DiagonalCharacterSpeed;
+                characterVelocityInPercent.y = DiagonalCharacterSpeed;
             }
             else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
             {
-                characterVelocityInPercent.x = HalfCharacterSpeed;
-                characterVelocityInPercent.y = -HalfCharacterSpeed;
+                characterVelocityInPercent.x = DiagonalCharacterSpeed;
+                characterVelocityInPercent.y = -DiagonalCharacterSpeed;
             }
             else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
             {
-                characterVelocityInPercent.x = -HalfCharacterSpeed;
-                characterVelocityInPercent.y = -HalfCharacterSpeed;
+                characterVelocityInPercent.x = -DiagonalCharacterSpeed;
+                characterVelocityInPercent.y = -DiagonalCharacterSpeed;
             }
             else if (Input.GetKey(KeyCode.D))
                 characterVelocityInPercent.x = CharacterSpeed;
@@ -60,6 +61,7 @@ public class GameLogic : MonoBehaviour
                 characterVelocityInPercent.y = -CharacterSpeed;
         }
 
+        //To DO?
         characterPositionInPercent += (characterVelocityInPercent * Time.deltaTime);
 
         Vector2 screenPos = new Vector2(characterPositionInPercent.x * (float)Screen.width, characterPositionInPercent.y * (float)Screen.height);
